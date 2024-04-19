@@ -3,11 +3,18 @@ from tkinter import *
 from tkinter import ttk
 import sqlite3 as sql
 
-rwSelectQuiz = tk.Tk()
-root = rwSelectQuiz
+class QuizBowlApp:
+    def __init__(self):
+        
+        self.databaseName = 'problems.db'
+        self.conn = sql.connect(self.databaseName)
+        self.cur = self.conn.cursor()
+        self.courses = self.getCourses()
+        self.score = 0
+    
+    def getCourses():
+        self.cur.execute('SELECT DISTINCT Course FROM problems')
 
-class SelectQuiz:
-    def __init__(self, root):
         self.labSelectQuiz = tk.Label(root, text = "Select a quiz topic to be tested on.")
         self.labSelectQuiz.grid()
 
